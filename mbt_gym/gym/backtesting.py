@@ -7,8 +7,7 @@ from mbt_gym.agents.Agent import Agent
 from mbt_gym.gym.helpers.generate_trajectory import generate_trajectory
 import warnings
 
-
-def get_sharpe_ratio(env: gym.Env, agent: Agent, risk_free_rate: float = 0.099):
+def get_sharpe_ratio(env: gym.Env, agent: Agent, risk_free_rate: float = 0):
     """
     The Annualized Sharpe Ratio is calculated as:
                 Sharpe_Ratio = sqrt(num_steps)*(Returns  - Risk Free Rate)/(Std of Return)
@@ -19,13 +18,13 @@ def get_sharpe_ratio(env: gym.Env, agent: Agent, risk_free_rate: float = 0.099):
     portfolio_values = (obs[:, CASH_INDEX, :] + obs[:, INVENTORY_INDEX, :] * obs[:, ASSET_PRICE_INDEX, :]).squeeze()
     if min(np.abs(portfolio_values)) < 1e-6:
         warnings.warn("Runtime Warning: Division by Zero")
-    return_pcts = np.diff(portfolio_values, 1) / portfolio_values[1:]
+    safe_prev = np.where(np.abs(portfolio_values[1:]) < 1e-6, 1e-6, portfolio_values[1:])
+    return_pcts = np.diff(portfolio_values, 1) / safe_prev
     annualized_std_returns = return_pcts.std() * np.sqrt(env.n_steps)
     return_pcts_mean = return_pcts.mean()
     if return_pcts_mean < 0:
         warnings.warn("Warning: Mean Return % is negative. Sharpe Ratio may not be appropriate.")
     return (return_pcts_mean * env.n_steps - risk_free_rate) / annualized_std_returns
-
 
 def get_sortino_ratio(env: gym.Env, agent: Agent, risk_free_rate: float = 0.099):
     """
