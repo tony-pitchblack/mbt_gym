@@ -8,3 +8,4 @@ stable_baselines3<2.0.0
 stochastic==0.6.0
 tensorboard
 torch>=1.13.1
+tqdm
