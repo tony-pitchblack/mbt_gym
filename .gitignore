@@ -1,8 +1,8 @@
 .DS_Store
 
-# Update notebooks manually, if necessary
-notebooks
-TMP_NOTEBOOKS
+# Notebooks' temporary output files
+SB_models
+tensorboard
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
