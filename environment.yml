@@ -1,0 +1,20 @@
+name: mbt_gym
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - gym=0.26.2
+  - jupyter
+  - matplotlib=3.5
+  - numpy=1.22.3
+  - pandas=1.3.5
+  - seaborn=0.11.2
+  - pytorch>=1.13.1
+  - pip
+  - pip:
+    - "stable-baselines3<2.0.0"
+    - stochastic==0.6.0
+    - tensorboard
+    - tqdm 
