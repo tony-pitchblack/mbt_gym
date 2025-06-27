@@ -5,7 +5,6 @@ channels:
   - defaults
 dependencies:
   - python=3.10
-  - gym=0.26.2
   - jupyter
   - matplotlib=3.5
   - numpy=1.22.3
@@ -14,7 +13,8 @@ dependencies:
   - pytorch>=1.13.1
   - pip
   - pip:
-    - "stable-baselines3<2.0.0"
+    - stable-baselines3<2.0.0
+    - gym==0.26.2
     - stochastic==0.6.0
     - tensorboard
     - tqdm 
